@@ -10,9 +10,25 @@ export type TypedIO = Server<ClientToServerEvents, ServerToClientEvents>;
 let io: TypedIO;
 
 export function setupSocket(httpServer: HttpServer): TypedIO {
+  const allowedOrigins = [
+    config.clientUrl.replace(/\/$/, ''), // Remove trailing slash if present
+    'http://localhost:3000',
+  ];
+
   io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
     cors: {
-      origin: config.clientUrl,
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (
+          allowedOrigins.includes(origin) ||
+          origin.endsWith('.vercel.app') ||
+          origin.startsWith('http://localhost:')
+        ) {
+          return callback(null, true);
+        }
+        return callback(new Error('Not allowed by CORS'), false);
+      },
+      methods: ['GET', 'POST'],
       credentials: true,
     },
     pingInterval: 10000,
