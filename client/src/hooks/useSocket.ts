@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import { connectSocket, disconnectSocket, getSocket } from '../socket';
+import { connectSocket, getSocket } from '../socket';
 import { useAuthStore } from '../store/authStore';
 
 export function useSocket() {
