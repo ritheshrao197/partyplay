@@ -14,7 +14,20 @@ const httpServer = createServer(app);
 
 // Middleware
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors({ origin: config.clientUrl, credentials: true }));
+app.use(cors({ 
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      origin === config.clientUrl || 
+      origin.endsWith('.vercel.app') || 
+      origin.startsWith('http://localhost:')
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  }, 
+  credentials: true 
+}));
 app.use(express.json());
 
 // Routes
