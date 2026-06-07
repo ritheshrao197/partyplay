@@ -64,7 +64,7 @@ export default function Login() {
           <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
             <span className="text-4xl font-display font-black">L</span>
           </div>
-          <h1 className="text-4xl font-display font-black text-gradient">Loki</h1>
+          <h1 className="text-4xl font-display font-black text-gradient">partyplay</h1>
           <p className="text-white/50">Multiplayer party games for everyone</p>
         </div>
 

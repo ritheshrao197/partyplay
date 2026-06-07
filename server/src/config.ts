@@ -5,7 +5,7 @@ export const config = {
   port: parseInt(process.env.PORT || '4000', 10),
 
   database: {
-    url: process.env.DATABASE_URL || 'postgresql://loki:loki_dev_pass@localhost:5432/loki',
+    url: process.env.DATABASE_URL || 'postgresql://partyplay:partyplay_dev_pass@localhost:5432/partyplay',
   },
 
   redis: {

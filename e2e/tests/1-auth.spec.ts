@@ -12,7 +12,7 @@ test.describe('Authentication Flow', () => {
     
     // Verify localStorage has the token and user data via Zustand's persist key
     const storageState = await page.evaluate(() => {
-      return localStorage.getItem('loki-auth');
+      return localStorage.getItem('partyplay-auth');
     });
     
     expect(storageState).not.toBeNull();

@@ -57,7 +57,7 @@ async function start() {
 
     // Start HTTP + WebSocket server
     httpServer.listen(config.port, () => {
-      console.log(`[Server] Loki server running on port ${config.port}`);
+      console.log(`[Server] partyplay server running on port ${config.port}`);
       console.log(`[Server] Environment: ${config.nodeEnv}`);
     });
   } catch (err) {

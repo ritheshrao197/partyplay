@@ -1,25 +1,25 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: loki-postgres
+    container_name: partyplay-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: loki
-      POSTGRES_PASSWORD: loki_dev_pass
-      POSTGRES_DB: loki
+      POSTGRES_USER: partyplay
+      POSTGRES_PASSWORD: partyplay_dev_pass
+      POSTGRES_DB: partyplay
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U loki"]
+      test: ["CMD-SHELL", "pg_isready -U partyplay"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7-alpine
-    container_name: loki-redis
+    container_name: partyplay-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -35,14 +35,14 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: loki-server
+    container_name: partyplay-server
     restart: unless-stopped
     ports:
       - "4000:4000"
     environment:
       NODE_ENV: production
       PORT: 4000
-      DATABASE_URL: postgresql://loki:loki_dev_pass@postgres:5432/loki
+      DATABASE_URL: postgresql://partyplay:partyplay_dev_pass@postgres:5432/partyplay
       REDIS_URL: redis://redis:6379
       JWT_SECRET: change-me-in-production-super-secret-key
       CLIENT_URL: http://localhost:3000
@@ -56,7 +56,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    container_name: loki-client
+    container_name: partyplay-client
     restart: unless-stopped
     ports:
       - "3000:80"

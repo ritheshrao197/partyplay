@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-sm font-bold font-display">
               L
             </div>
-            <span className="font-display text-xl font-bold text-gradient hidden sm:block">Loki</span>
+            <span className="font-display text-xl font-bold text-gradient hidden sm:block">partyplay</span>
           </Link>
 
           <div className="flex items-center gap-1 sm:gap-2">
