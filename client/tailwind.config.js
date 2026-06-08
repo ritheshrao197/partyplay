@@ -9,23 +9,20 @@ export default {
         display: ['Fredoka', 'Inter', 'sans-serif'],
       },
       colors: {
+        background: '#121418',
+        surface: '#1C2128',
+        text: '#F3F4F6',
         primary: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
+          400: '#FBBF24',
+          500: '#F59E0B', // Button Hover
+          600: '#D97706', // Primary Accent
+          700: '#B45309',
         },
-        accent: {
-          400: '#f472b6',
-          500: '#ec4899',
-          600: '#db2777',
+        secondary: {
+          400: '#818CF8',
+          500: '#6366F1',
+          600: '#4F46E5', // Secondary Accent
+          700: '#4338CA',
         },
         game: {
           imposter: '#ef4444',

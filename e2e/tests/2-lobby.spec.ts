@@ -12,7 +12,8 @@ test.describe('Room Creation and Lobby', () => {
 
     // 1. Host Login
     await hostPage.goto('/login');
-    await hostPage.getByRole('button', { name: /Play as Guest/i }).click();
+    await hostPage.getByPlaceholder('Enter your display name').fill('HostUser');
+    await hostPage.getByRole('button', { name: /Join the Party/i }).click();
     await expect(hostPage).toHaveURL('/');
 
     // 2. Host Creates Room
@@ -32,7 +33,8 @@ test.describe('Room Creation and Lobby', () => {
 
     // 3. Player Login
     await playerPage.goto('/login');
-    await playerPage.getByRole('button', { name: /Play as Guest/i }).click();
+    await playerPage.getByPlaceholder('Enter your display name').fill('PlayerUser');
+    await playerPage.getByRole('button', { name: /Join the Party/i }).click();
     await expect(playerPage).toHaveURL('/');
 
     // 4. Player Joins Room

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import { apiFetch } from '../socket';
 import Button from '../components/Button';
-import { FiUser, FiGlobe } from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 
 interface AuthResponse {
   token: string;
@@ -15,38 +15,20 @@ export default function Login() {
   const navigate = useNavigate();
   const setAuth = useAuthStore((s) => s.setAuth);
   const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState('');
 
-  const guestLogin = async () => {
+  const handleJoin = async (e: FormEvent) => {
+    e.preventDefault();
     setLoading(true);
     try {
-      const data = await apiFetch<AuthResponse>('/auth/guest', { method: 'POST' });
-      setAuth(data.token, data.user);
-      navigate('/');
-    } catch (err) {
-      console.error('Guest login failed:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const googleLogin = async () => {
-    // In production, use @react-oauth/google for real Google sign-in
-    // For now, simulate with a mock
-    setLoading(true);
-    try {
-      const data = await apiFetch<AuthResponse>('/auth/google', {
+      const data = await apiFetch<AuthResponse>('/auth/guest', {
         method: 'POST',
-        body: JSON.stringify({
-          googleId: 'mock-google-id',
-          email: `user${Date.now()}@gmail.com`,
-          name: `GoogleUser${Math.floor(Math.random() * 999)}`,
-          picture: '',
-        }),
+        body: JSON.stringify({ username: username.trim() || undefined }),
       });
       setAuth(data.token, data.user);
       navigate('/');
     } catch (err) {
-      console.error('Google login failed:', err);
+      console.error('Guest login failed:', err);
     } finally {
       setLoading(false);
     }
@@ -61,39 +43,41 @@ export default function Login() {
       >
         {/* Logo */}
         <div className="space-y-3">
-          <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
+          <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
             <span className="text-4xl font-display font-black">L</span>
           </div>
           <h1 className="text-4xl font-display font-black text-gradient">partyplay</h1>
-          <p className="text-white/50">Multiplayer party games for everyone</p>
+          <p className="text-text/70">Multiplayer party games for everyone</p>
         </div>
 
-        {/* Login Buttons */}
-        <div className="space-y-3">
+        {/* Join Form */}
+        <form onSubmit={handleJoin} className="space-y-4">
+          <div>
+            <input
+              type="text"
+              className="input-field text-center text-lg py-4"
+              placeholder="Enter your display name"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              maxLength={20}
+              disabled={loading}
+              autoFocus
+            />
+          </div>
+
           <Button
             variant="primary"
             size="lg"
-            onClick={guestLogin}
+            type="submit"
             disabled={loading}
-            icon={<FiUser />}
-            className="w-full"
+            icon={<FiArrowRight />}
+            className="w-full text-lg py-4"
           >
-            Play as Guest
+            {loading ? 'Joining...' : 'Join the Party'}
           </Button>
+        </form>
 
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={googleLogin}
-            disabled={loading}
-            icon={<FiGlobe />}
-            className="w-full"
-          >
-            Sign in with Google
-          </Button>
-        </div>
-
-        <p className="text-xs text-white/30">
+        <p className="text-xs text-text/30">
           By playing, you agree to have a good time
         </p>
       </motion.div>

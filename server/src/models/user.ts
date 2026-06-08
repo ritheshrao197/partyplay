@@ -25,9 +25,9 @@ function generateUsername(): string {
   return `${adj}${noun}${num}`;
 }
 
-export async function createGuestUser(): Promise<User> {
+export async function createGuestUser(customUsername?: string): Promise<User> {
   const id = uuid();
-  const username = generateUsername();
+  const username = customUsername && customUsername.trim().length > 0 ? customUsername.trim() : generateUsername();
   const avatar = `avatar_${Math.floor(Math.random() * 12) + 1}`;
 
   const { rows } = await query(

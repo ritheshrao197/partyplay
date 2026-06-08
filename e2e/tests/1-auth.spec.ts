@@ -5,7 +5,8 @@ test.describe('Authentication Flow', () => {
     await page.goto('/login');
     
     // Click Play as Guest
-    await page.getByRole('button', { name: /Play as Guest/i }).click();
+    await page.getByPlaceholder('Enter your display name').fill('TestUser');
+    await page.getByRole('button', { name: /Join the Party/i }).click();
     
     // Verify successful login redirects to home
     await expect(page).toHaveURL('/');
@@ -22,7 +23,8 @@ test.describe('Authentication Flow', () => {
   test('should allow updating username in profile', async ({ page }) => {
     // Login first
     await page.goto('/login');
-    await page.getByRole('button', { name: /Play as Guest/i }).click();
+    await page.getByPlaceholder('Enter your display name').fill('TestUser');
+    await page.getByRole('button', { name: /Join the Party/i }).click();
     await expect(page).toHaveURL('/');
 
     // Navigate to profile
@@ -43,7 +45,8 @@ test.describe('Authentication Flow', () => {
 
   test('should auto-login on refresh', async ({ page }) => {
     await page.goto('/login');
-    await page.getByRole('button', { name: /Play as Guest/i }).click();
+    await page.getByPlaceholder('Enter your display name').fill('TestUser');
+    await page.getByRole('button', { name: /Join the Party/i }).click();
     await expect(page).toHaveURL('/');
     
     // Refresh the page

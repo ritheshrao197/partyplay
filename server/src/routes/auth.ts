@@ -9,23 +9,13 @@ import { query } from '../database/index.js';
 const router = Router();
 
 // POST /api/auth/guest
-router.post('/guest', async (_req: Request, res: Response) => {
-  const user = await createGuestUser();
-  const token = generateToken({ userId: user.id, username: user.username });
-  res.json({ token, user: toPublicUser(user) });
+const guestSchema = z.object({
+  username: z.string().max(30).optional(),
 });
 
-// POST /api/auth/google
-const googleSchema = z.object({
-  googleId: z.string(),
-  email: z.string().email(),
-  name: z.string().optional(),
-  picture: z.string().optional(),
-});
-
-router.post('/google', validate(googleSchema), async (req: Request, res: Response) => {
-  const { googleId, email, name, picture } = req.body;
-  const user = await findOrCreateGoogleUser(googleId, email, name, picture);
+router.post('/guest', validate(guestSchema), async (req: Request, res: Response) => {
+  const { username } = req.body;
+  const user = await createGuestUser(username);
   const token = generateToken({ userId: user.id, username: user.username });
   res.json({ token, user: toPublicUser(user) });
 });
