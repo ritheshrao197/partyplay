@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <nav className="bg-surface/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-50 px-4 py-3 shadow-lg shadow-[rgba(37,117,252,0.1)]">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="partyplay logo" className="w-12 h-12 object-contain drop-shadow-[0_0_8px_rgba(37,117,252,0.8)]" />
+            <img src="/logo.png" alt="partyplay logo" className="w-20 h-20 object-contain drop-shadow-[0_0_8px_rgba(37,117,252,0.8)]" />
             <span className="font-display text-2xl font-bold text-gradient">partyplay</span>
           </Link>
 
