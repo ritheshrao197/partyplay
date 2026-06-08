@@ -14,7 +14,7 @@ import WrongAnswersGame from '../games/OnlyWrongAnswers/WrongAnswersGame';
 export default function Game() {
   const { roomCode } = useParams<{ roomCode: string }>();
   const navigate = useNavigate();
-  const { room } = useRoom();
+  const { room, leaveRoom } = useRoom();
   const { phase, gameEndData, reset } = useGame();
 
   useEffect(() => {
@@ -77,13 +77,23 @@ export default function Game() {
   };
 
   return (
-    <>
-      {gameComponents[room.gameType] || (
-        <div className="text-center py-20 text-white/50">
-          Unknown game type: {room.gameType}
-        </div>
-      )}
+    <div className="flex flex-col h-full space-y-4">
+      <div className="flex justify-between items-center mb-2 px-2">
+        <div className="text-sm text-text/50 font-mono">Room: {room.roomCode}</div>
+        <Button variant="danger" size="sm" onClick={() => leaveRoom()}>
+          Leave Game
+        </Button>
+      </div>
+
+      <div className="flex-1">
+        {gameComponents[room.gameType] || (
+          <div className="text-center py-20 text-white/50">
+            Unknown game type: {room.gameType}
+          </div>
+        )}
+      </div>
+      
       <Chat />
-    </>
+    </div>
   );
 }

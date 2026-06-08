@@ -7,22 +7,31 @@ import { FiPlus, FiSearch } from 'react-icons/fi';
 
 export default function RoomBrowser() {
   const navigate = useNavigate();
-  const { joinRoom, room, error } = useRoom();
+  const { joinRoom, leaveRoom, room, error } = useRoom();
   const [joinCode, setJoinCode] = useState('');
   const [showJoin, setShowJoin] = useState(false);
-
-  // Navigate when room is joined
-  if (room) {
-    navigate(`/game/${room.roomCode}`);
-  }
 
   const handleJoin = () => {
     if (joinCode.trim().length < 4) return;
     joinRoom(joinCode.trim());
+    setShowJoin(false);
+    navigate(`/game/${joinCode.trim().toUpperCase()}`);
   };
 
   return (
     <div className="space-y-6 animate-fade-in">
+      {room && (
+        <div className="glass-card mb-6 bg-primary-900/20 border-primary-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-bold text-primary-400">Active Game: {room.roomCode}</h2>
+            <p className="text-sm text-text/70">You are currently in a room.</p>
+          </div>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Button variant="danger" onClick={leaveRoom} className="flex-1 sm:flex-none">Leave Room</Button>
+            <Button variant="primary" onClick={() => navigate(`/game/${room.roomCode}`)} className="flex-1 sm:flex-none">Return</Button>
+          </div>
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-display font-bold">Public Rooms</h1>
