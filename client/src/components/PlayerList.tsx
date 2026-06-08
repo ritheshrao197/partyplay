@@ -20,16 +20,21 @@ export default function PlayerList({ players, showScore = false, showReady = fal
         >
           <Avatar username={player.username} size={compact ? 'sm' : 'md'} isHost={player.isHost} isReady={showReady ? player.isReady : undefined} />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate">
-              {player.username}
-              {player.isHost && <span className="ml-1.5 text-yellow-400 text-xs">HOST</span>}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium text-text truncate">
+                {player.username}
+              </p>
+              {player.isConnected && (
+                <span className="w-2 h-2 rounded-full bg-success shadow-[0_0_8px_rgba(0,230,118,0.8)] flex-shrink-0 animate-pulse-slow" title="Online"></span>
+              )}
+              {player.isHost && <span className="text-yellow-400 text-[10px] font-bold border border-yellow-400/30 px-1 rounded">HOST</span>}
+            </div>
             {showScore && (
-              <p className="text-xs text-white/50">{player.score} pts</p>
+              <p className="text-xs text-text-muted">{player.score} pts</p>
             )}
           </div>
           {showScore && (
-            <span className={`text-xs font-bold ${idx === 0 ? 'text-yellow-400' : idx === 1 ? 'text-gray-300' : idx === 2 ? 'text-orange-400' : 'text-white/40'}`}>
+            <span className={`text-xs font-bold ${idx === 0 ? 'text-yellow-400 drop-shadow-md' : idx === 1 ? 'text-gray-300' : idx === 2 ? 'text-orange-400' : 'text-text-muted/40'}`}>
               #{idx + 1}
             </span>
           )}

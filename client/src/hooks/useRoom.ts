@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useSocket } from './useSocket';
 import { useRoomStore, type GameType } from '../store/roomStore';
+import { useGameStore } from '../store/gameStore';
 
 export function useRoom() {
   const { emit } = useSocket();
@@ -23,6 +24,8 @@ export function useRoom() {
 
   const leaveRoom = useCallback(() => {
     emit('room:leave');
+    useRoomStore.getState().clearRoom();
+    useGameStore.getState().reset();
   }, [emit]);
 
   const toggleReady = useCallback(

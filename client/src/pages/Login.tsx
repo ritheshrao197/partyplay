@@ -39,15 +39,12 @@ export default function Login() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card max-w-md w-full text-center space-y-8"
+        className="glass-card max-w-md w-full text-center space-y-8 shadow-[0_0_40px_rgba(37,117,252,0.15)]"
       >
         {/* Logo */}
         <div className="space-y-3">
-          <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
-            <span className="text-4xl font-display font-black">L</span>
-          </div>
-          <h1 className="text-4xl font-display font-black text-gradient">partyplay</h1>
-          <p className="text-text/70">Multiplayer party games for everyone</p>
+          <img src="/logo.png" alt="partyplay logo" className="w-200 h-200 mx-auto object-contain drop-shadow-[0_0_15px_rgba(37,117,252,0.6)]" />
+          <p className="text-text-muted">Multiplayer party games for everyone</p>
         </div>
 
         {/* Join Form */}
@@ -77,7 +74,7 @@ export default function Login() {
           </Button>
         </form>
 
-        <p className="text-xs text-text/30">
+        <p className="text-xs text-text-muted/60">
           By playing, you agree to have a good time
         </p>
       </motion.div>

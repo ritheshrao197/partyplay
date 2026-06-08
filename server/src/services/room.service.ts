@@ -50,6 +50,10 @@ class RoomService {
 
     await playerModel.removePlayer(room.id, userId);
 
+    if (room.status === 'playing') {
+      await gameManager.forceEndGame(roomCode);
+    }
+
     const remainingPlayers = await playerModel.getPlayerCount(room.id);
 
     // If no players left, disband room

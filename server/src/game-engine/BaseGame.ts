@@ -146,6 +146,12 @@ export abstract class BaseGame {
     });
   }
 
+  public async forceEndGame(): Promise<void> {
+    if (this.isRunning) {
+      await this.endGame();
+    }
+  }
+
   protected getPlayer(userId: string): GamePlayer | undefined {
     return this.players.find((p) => p.userId === userId);
   }

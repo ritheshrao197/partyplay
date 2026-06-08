@@ -9,21 +9,25 @@ export default {
         display: ['Fredoka', 'Inter', 'sans-serif'],
       },
       colors: {
-        background: '#121418',
-        surface: '#1C2128',
-        text: '#F3F4F6',
+        background: '#0B132B',
+        surface: '#1C2541',
+        text: {
+          DEFAULT: '#FFFFFF',
+          muted: '#9A8C98',
+        },
         primary: {
-          400: '#FBBF24',
-          500: '#F59E0B', // Button Hover
-          600: '#D97706', // Primary Accent
-          700: '#B45309',
+          400: '#8A2BE2', // Fallback mix
+          500: '#2575FC', // Electric Cyan
+          600: '#6a11cb', // Sky Blue / Purple
+          700: '#4A0D94',
         },
         secondary: {
-          400: '#818CF8',
-          500: '#6366F1',
-          600: '#4F46E5', // Secondary Accent
-          700: '#4338CA',
+          400: '#FF8A8A',
+          500: '#FF416C', // Neon Orange
+          600: '#FF4B2B', // Coral Red
+          700: '#CC3A22',
         },
+        success: '#00E676', // Online Indicator Green
         game: {
           imposter: '#ef4444',
           wordrush: '#3b82f6',

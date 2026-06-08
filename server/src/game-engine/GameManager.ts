@@ -59,6 +59,14 @@ class GameManager {
     }
   }
 
+  async forceEndGame(roomCode: string): Promise<void> {
+    const game = this.games.get(roomCode);
+    if (game) {
+      await game.forceEndGame();
+      this.endGame(roomCode);
+    }
+  }
+
   getGame(roomCode: string): BaseGame | undefined {
     return this.games.get(roomCode);
   }

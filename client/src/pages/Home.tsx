@@ -53,15 +53,15 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
           >
-            <Card hover onClick={() => setSelectedGame(game.type)} className="h-full">
+            <Card hover onClick={() => setSelectedGame(game.type)} className="h-full hover:scale-[1.02] transition-all duration-300 ease-out shadow-lg hover:shadow-[0_0_20px_rgba(37,117,252,0.3)]">
               <div className="flex items-start gap-4">
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${game.color} flex items-center justify-center shrink-0 shadow-lg`}>
+                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${game.color} flex items-center justify-center shrink-0 shadow-lg border border-white/20`}>
                   {game.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-display font-bold text-lg">{game.name}</h3>
-                  <p className="text-sm text-white/50 mt-1">{game.desc}</p>
-                  <div className="flex items-center gap-1.5 mt-2 text-white/40">
+                  <h3 className="font-display font-bold text-lg text-text">{game.name}</h3>
+                  <p className="text-sm text-text-muted mt-1">{game.desc}</p>
+                  <div className="flex items-center gap-1.5 mt-2 text-text-muted/60">
                     <FiUsers size={12} />
                     <span className="text-xs">{game.players} players</span>
                   </div>
